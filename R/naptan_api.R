@@ -1,3 +1,5 @@
+source("R/utils.R")
+`%>%` <- dplyr::`%>%`
 
 get_single_region_nodes <- function(
     region_name
@@ -17,8 +19,14 @@ get_single_region_nodes <- function(
     )
   }
   
-  node_data <- naptanr::call_naptan_region(region_name)
-
+  node_data <- naptanr::call_naptan_region(region_name) %>%
+    dplyr::select(
+      -c(Longitude,Latitude)
+    )
+  
+  # Convert UKOS to longitude and latitude
+  node_data <- ukos_to_lonlat(node_data)
+  
   return(node_data)  
   
 }
@@ -32,9 +40,19 @@ get_multi_region_nodes <- function(
     node_df_list[[region_i]] <- node_data_i
   }
   
-  node_data <- data.table::rbindlist(node_df_list)
+  node_data <- data.table::rbindlist(node_df_list) 
   
   return(node_data)
 }
 
-get_single_region_nodes("West Midlands")
+node_data <- get_multi_region_nodes(
+  c("West Midlands", "Worcestershire", "Staffordshire", "Warwickshire")
+) %>%
+  dplyr::rename(
+    LONG = Longitude,
+    LAT = Latitude
+  )
+
+library(BSol.mapR)
+map <- plot_empty_map(area_name = "Birmingham")
+add_points(map, node_data)
