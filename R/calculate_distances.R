@@ -52,18 +52,46 @@ find_all_nodes <- function(
 get_nearest_node <- function(
   coord_df,
   region_array,
-  long_name = "longitude",
-  lat_name = "latitude"
+  longitude_col = "longitude",
+  latitude_col = "latitude",
+  search_radius_m = 2000
 ) {
-  # Get node data from API
-  node_data <- get_multi_region_nodes()
   
+  # Get node data from API
+  node_data <- get_multi_region_nodes(region_array) 
+  
+  nearest_node <- find_all_nodes(
+    coord_df,
+    node_data,
+    longitude_col = longitude_col,
+    latitude_col = latitude_col,
+    search_radius_m = search_radius_m
+    ) %>%
+    dplyr::slice_min(distance_m, n = 1, with_ties = FALSE) %>%
+    dplyr::ungroup()
+  
+  return(nearest_node)
 
 }
 
-node_data <- get_multi_region_nodes(
-    c("West Midlands")
-  ) 
+get_nearest_node_dist <- function(
+    coord_df,
+    region_array,
+    longitude_col = "longitude",
+    latitude_col = "latitude",
+    search_radius_m = 2000
+) {
+  
+  min_dist <- get_nearest_node(
+    coord_data,
+    region_array,
+    longitude_col = longitude_col,
+    latitude_col = latitude_col,
+    search_radius_m = search_radius_m
+  )$distance_m
+  
+  return(min_dist)
+}
 
 coord_data <- node_data %>% 
     dplyr::rename(
@@ -72,10 +100,10 @@ coord_data <- node_data %>%
     ) %>%
   head(3)
 
-check <- find_all_nodes(
+get_nearest_node_dist(
   coord_data,
-  node_data,
+  c("West Midlands"),
   longitude_col = "LONG",
   latitude_col = "LAT",
   search_radius_m = 200
-) 
+)
