@@ -44,15 +44,15 @@ get_multi_region_nodes <- function(
   
   return(node_data)
 }
-
-node_data <- get_multi_region_nodes(
-  c("West Midlands", "Worcestershire", "Staffordshire", "Warwickshire")
-) %>%
-  dplyr::rename(
-    LONG = Longitude,
-    LAT = Latitude
-  )
-
-library(BSol.mapR)
-map <- plot_empty_map(area_name = "Birmingham")
-add_points(map, node_data)
+# 
+# node_data <- get_multi_region_nodes(
+#   c("West Midlands", "Worcestershire", "Staffordshire", "Warwickshire")
+# ) %>%
+#   dplyr::rename(
+#     LONG = Longitude,
+#     LAT = Latitude
+#   )
+# 
+# library(BSol.mapR)
+# map <- plot_empty_map(area_name = "Birmingham")
+# add_points(map, node_data)
