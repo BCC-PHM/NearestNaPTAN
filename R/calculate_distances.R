@@ -1,6 +1,4 @@
-source("R/naptan_api.R")
-source("R/utils.R")
-
+`%>%` <- dplyr::`%>%`
 
 #' Find all nodes within search_radius_m of long and lat (Single point)
 #'

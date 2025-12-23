@@ -1,6 +1,16 @@
-source("R/utils.R")
 `%>%` <- dplyr::`%>%`
 
+#' Call NAPTAN API to get all nodes for a given region.
+#'
+#' @param region_name NAPTAN region. Use `naptanr::lookup_atco_codes()` to find allowed region names.
+#'
+#' @return Returns data frame of NAPTAN nodes within given region
+#' @export
+#'
+#' @examples
+#' 
+#' get_single_region_nodes("West Midlands")
+#' 
 get_single_region_nodes <- function(
     region_name
 ) {
@@ -30,6 +40,19 @@ get_single_region_nodes <- function(
   return(node_data)  
   
 }
+
+#' Call NAPTAN API to get all nodes for one or more regions.
+#'
+#' @param region_array Array of NAPTAN region. Use `naptanr::lookup_atco_codes()` to find allowed region names.
+#'
+#' @return Returns data frame of NAPTAN nodes within given region
+#' @export
+#'
+#' @examples
+#' 
+#' region_array <- c("West Midlands", "Worcestershire", "Staffordshire", "Warwickshire")
+#' 
+#' get_single_region_nodes(region_array)
 
 get_multi_region_nodes <- function(
     region_array
