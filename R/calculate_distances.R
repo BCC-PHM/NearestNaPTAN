@@ -193,19 +193,3 @@ get_nearest_node_dist <- function(
   return(min_dist)
 }
 
-coord_df <- data.frame(
-  "LONG" = c(-1.9060413, -1.7802142),
-  "LAT" = c(52.4803994, 52.4115384)
-)
-
-min_dist <- get_nearest_node_dist(
-  coord_df,
-  c("West Midlands"),
-  longitude_col = "LONG",
-  latitude_col = "LAT",
-  search_radius_m = 200
-)
-
-min_dist
-  
-
