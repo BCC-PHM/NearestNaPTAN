@@ -1,3 +1,24 @@
+#' Convert UKOS eastings and northings to longitude and latitude
+#'
+#' @param df Data frame containing UKOS eastings and northings
+#' @param easting_col Eastings column name
+#' @param northing_col Northings column name
+#'
+#' @return Returns original data frame with additional longitude and latitude columns
+#' @export
+#'
+#' @examples
+#' 
+#' df <- data.frame(
+#' "EAST" = c(436403, 436400),
+#' "NORTH" = c(280955, 280967)
+#' )
+#' 
+#' ukos_to_lonlat(
+#'   df,
+#'   easting_col = "EAST",
+#'   northing_col = "NORTH"
+#' )
 ukos_to_lonlat <- function(
     df,
     easting_col = "Easting",
