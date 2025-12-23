@@ -1,6 +1,8 @@
-ukos_to_lonlat <- function(df,
-                           easting_col = "Easting",
-                           northing_col = "Northing") {
+ukos_to_lonlat <- function(
+    df,
+    easting_col = "Easting",
+    northing_col = "Northing"
+    ) {
   
   sf_obj <- sf::st_as_sf(
     df,
