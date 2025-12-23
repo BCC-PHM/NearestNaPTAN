@@ -13,7 +13,7 @@
 #' @examples 
 #' node_data <- get_single_region_nodes("West Midlands")
 #' 
-#' nodes_in_300m <- find_nodes(
+#' nodes_in_300m <- get_nodes(
 #'    -1.9060413,
 #'    52.4803994,
 #'    node_data,
@@ -21,7 +21,7 @@
 #' )
 #' 
 #' nodes_in_300m
-find_nodes <- function(
+get_nodes <- function(
     long,
     lat,
     node_data,
@@ -57,7 +57,7 @@ find_nodes <- function(
 #'   "LAT" = c(52.4803994, 52.4115384)
 #' )
 #' 
-#' nodes_in_300m <- find_all_nodes(
+#' nodes_in_300m <- get_all_nodes(
 #'   coord_df, 
 #'   node_data,
 #'   longitude_col = "LONG",
@@ -66,7 +66,7 @@ find_nodes <- function(
 #' )
 #' 
 #' nodes_in_300m
-find_all_nodes <- function(
+get_all_nodes <- function(
     coord_df,
     node_data,
     longitude_col = "Longitude",
@@ -75,7 +75,7 @@ find_all_nodes <- function(
 ) {
   nodes_list <- list()
   for (i in 1:nrow(coord_df)) {
-    nodes_list[[i]] <- find_nodes(
+    nodes_list[[i]] <- get_nodes(
       coord_df[[longitude_col]][i],
       coord_df[[latitude_col]][i],
       node_data,
@@ -133,7 +133,7 @@ get_nearest_node <- function(
   # Get node data from API
   node_data <- get_multi_region_nodes(region_array) 
   
-  nearest_node <- find_all_nodes(
+  nearest_node <- get_all_nodes(
     coord_df,
     node_data,
     longitude_col = longitude_col,
@@ -183,7 +183,7 @@ get_nearest_node_dist <- function(
 ) {
   
   min_dist <- get_nearest_node(
-    coord_data,
+    coord_df,
     region_array,
     longitude_col = longitude_col,
     latitude_col = latitude_col,
@@ -193,6 +193,19 @@ get_nearest_node_dist <- function(
   return(min_dist)
 }
 
+coord_df <- data.frame(
+  "LONG" = c(-1.9060413, -1.7802142),
+  "LAT" = c(52.4803994, 52.4115384)
+)
 
+min_dist <- get_nearest_node_dist(
+  coord_df,
+  c("West Midlands"),
+  longitude_col = "LONG",
+  latitude_col = "LAT",
+  search_radius_m = 200
+)
 
+min_dist
+  
 
