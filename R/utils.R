@@ -40,3 +40,19 @@ ukos_to_lonlat <- function(
   
   return(df)
 }
+
+check_col_names <- function(
+    df,
+    col_name_list,
+    func_name
+) {
+  if (!all(col_name_list %in% colnames(df))) {
+    stop(
+      paste(
+        "Column names given to",
+        func_name,
+        "do not match the given data frame."
+        )
+    )
+  }
+}

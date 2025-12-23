@@ -73,6 +73,17 @@ get_all_nodes <- function(
     latitude_col = "Latitude",
     search_radius_m = 2000
 ) {
+  
+  # Check that given column names are in the data frame
+  check_col_names(
+    coord_df,
+    c(
+      longitude_col,
+      latitude_col
+    ),
+    "get_all_nodes()"
+  )
+  
   nodes_list <- list()
   for (i in 1:nrow(coord_df)) {
     nodes_list[[i]] <- get_nodes(
@@ -125,10 +136,20 @@ get_all_nodes <- function(
 get_nearest_node <- function(
   coord_df,
   region_array,
-  longitude_col = "longitude",
-  latitude_col = "latitude",
+  longitude_col = "Longitude",
+  latitude_col = "Latitude",
   search_radius_m = 2000
 ) {
+  
+  # Check that given column names are in the data frame
+  check_col_names(
+    coord_df,
+    c(
+      longitude_col,
+      latitude_col
+    ),
+    "get_nearest_node()"
+  )
   
   # Get node data from API
   node_data <- get_multi_region_nodes(region_array) 
@@ -177,10 +198,20 @@ get_nearest_node <- function(
 get_nearest_node_dist <- function(
     coord_df,
     region_array,
-    longitude_col = "longitude",
-    latitude_col = "latitude",
+    longitude_col = "Longitude",
+    latitude_col = "Latitude",
     search_radius_m = 2000
 ) {
+  
+  # Check that given column names are in the data frame
+  check_col_names(
+    coord_df,
+    c(
+      longitude_col,
+      latitude_col
+    ),
+    "get_nearest_node_dist()"
+  )
   
   min_dist <- get_nearest_node(
     coord_df,
