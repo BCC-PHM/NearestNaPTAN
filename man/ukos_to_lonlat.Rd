@@ -22,8 +22,8 @@ Convert UKOS eastings and northings to longitude and latitude
 \examples{
 
 df <- data.frame(
-"EAST" = c(436403, 436400),
-"NORTH" = c(280955, 280967)
+  "EAST" = c(436403, 436400),
+  "NORTH" = c(280955, 280967)
 )
 
 ukos_to_lonlat(
