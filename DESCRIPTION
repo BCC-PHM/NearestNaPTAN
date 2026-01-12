@@ -2,8 +2,8 @@ Package: NearestNaPTAN
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person("David", "Ellis", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person("David", "Ellis", , "David.Ellis@birmingham.gov.uk", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-9305-8153"))
 Description: What the package does (one paragraph).
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
